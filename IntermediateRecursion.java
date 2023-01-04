@@ -4,17 +4,22 @@ public class IntermediateRecursion {
 
 	public static int first = -1 ;
 	public static int last = -1;
+	public static boolean[] mappingArr =  new boolean[25] ; 
 	
 	public static void main(String[] args) {
 		int n = 3 ;
-		String name = "karishma";
+		String name = "amaxxrjexxextx";
 //		towerOfHanoi(n,"Src","Helper","Dest" );
 //		reverseString(name,0);
 //		getFirstLastOccurance(name,'a',0);
 //		System.out.println(last);
 //		System.out.println(first);
-		int arr[] = {1,2,3,4,2} ;
-		System.out.println(arraySorted(arr,0));
+//		int arr[] = {1,2,3,4,2} ;
+//		System.out.println(arraySorted(arr,0));
+//		moveAllX(name, 0 , "",0);
+//		removeDuplicate(name, 0,"");
+		String str = "abc";
+		printSubsiquence(str,0,""); 
 	}
 	
 	public static void towerOfHanoi(int n,String src, String helper, String dest) 
@@ -75,5 +80,54 @@ public class IntermediateRecursion {
 		}
 	
 	}
-
+	
+	public static void moveAllX(String str, int i , String newArr,int count) 
+	{
+		if(str.length()-1 == i ) 
+		{
+			for (int j = 0; j < count; j++) {
+				newArr += 'x';
+			}
+			System.out.println(newArr);
+			return ;
+		}
+		if(str.charAt(i) == 'x') 
+		{
+			count++;
+		}else 
+		{
+			newArr += str.charAt(i);
+		}
+		moveAllX(str,i+1,newArr,count);
+		
+	}
+	
+	public static void removeDuplicate(String str, int i, String newArr) 
+	{
+		if(str.length()-1 == i) 
+		{
+			System.out.println(newArr);
+			return ;
+		}
+		if(mappingArr[str.charAt(i)-'a'] == false) 
+		{
+			newArr += str.charAt(i);
+		}else 
+		{
+			mappingArr[str.charAt(i)-'a'] = true;
+		}
+		removeDuplicate(str,i+1,newArr);
+	}
+	
+	public static void printSubsiquence(String str, int i, String res ) 
+	{
+		if(str.length()  == i) 
+		{
+			System.out.println(res);
+			return ;
+		}
+		char currChar = str.charAt(i) ;
+		printSubsiquence(str,i+1,currChar+res);
+		printSubsiquence(str,i+1,res);
+	}
 }
