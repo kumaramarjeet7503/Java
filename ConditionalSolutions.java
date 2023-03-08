@@ -15,7 +15,8 @@ public class ConditionalSolutions {
 //		minimum(a,b,c);
 		
 //		displayGrades(80);
-		isPalindrome(121);
+//		isPalindrome(121);
+		printPrimeNumber(1, 200) ;
 		
 	}
 	
@@ -86,4 +87,28 @@ public class ConditionalSolutions {
 		 }
 			
 	}
+
+	public static void printPrimeNumber(int num1, int num2) 
+	{	
+	
+		while(num1 < num2) {
+			if(num1 > 1) {
+				int  i = 2 ;
+				int count = 0;
+				while( i < num1 ) 
+				{
+					if( num1 % i  == 0) 
+					{
+						count++ ;
+					}
+					i++ ;
+				}
+				if(count  == 0) 
+				{
+					System.out.println(i);
+				}
+			}num1++ ;
+		}
+		
+	} 
 }
