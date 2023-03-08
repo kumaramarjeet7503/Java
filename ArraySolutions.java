@@ -30,9 +30,44 @@ public class ArraySolutions {
 //		int[] index = {0,1,2,3,0};
 //		System.out.println(Arrays.toString(createTargetArray(nums,index))); 
 		
-	    System.out.println(checkIfPangram("thequickbrownfoxjumpsoverthelazydog")); 
-
+//	    System.out.println(checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
+//		int [][] image = {{1,1,0},{1,0,1},{0,0,0}} ;
+//		System.out.println(flipAndInvertImage(image)); 
+//
+		int [][] indices = {{2,1,5},{3,4,6},{6,7,7}} ;
+//		 print2DArray(oddCells(2,3,indices));
+		  System.out.println(diagonalSum(indices));  
 	}
+	
+	 public static int diagonalSum(int[][] mat) {
+		 	
+		 int sum =0;
+		 
+		 if(mat.length % 2== 0) 
+		 {
+			 
+		 }else 
+		 {
+			 int center = (mat.length % 2) +1;
+			 for(int row = 0 ; row < mat.length; row++) 
+			 {
+				 int i = row ;
+				 int j = center;
+				 while(i < j) 
+				 {
+					 sum += mat[j-1][j-1] ;
+					 j-- ;
+				 }
+				 
+				 j = mat.length ;
+				 i = center ;
+				 while(i)
+			 }
+		 }
+		 
+		 return sum ;
+		 
+	    }
 	
 	public static void printArray(int [] arr) 
 	{
@@ -50,7 +85,7 @@ public class ArraySolutions {
 			for(int cols = 0 ; cols < arr2D[row].length ; cols++ ) 
 			{
 				System.out.print(arr2D[row][cols]);
-				System.out.print(Arrays.toString(arr2D[row]));
+//				System.out.print(Arrays.toString(arr2D[row]));
 			}
 //			System.out.print(Arrays.toString(arr2D[row]));
 			System.out.println();
@@ -231,7 +266,7 @@ public class ArraySolutions {
         
     }
     
-        public int largestAltitude(int[] gain) {
+        public static int largestAltitude(int[] gain) {
             int largestAltitude = 0 ;
             for(int i =0; i<gain.length; i++)
             {
@@ -249,5 +284,67 @@ public class ArraySolutions {
             }
 
         return largestAltitude ;
+        }
+
+        public static int[][] flipAndInvertImage(int[][] image) {
+            for(int row = 0; row < image.length; row++)
+           {
+               for(int col = 0; col < image[row].length; col++ )
+               {
+                   if(col < image[row].length/2 )
+                   {
+                       int temp = image[row][col] ;
+                       image[row][col] = image[row][image[row].length-col-1] ;
+                       image[row][image[row].length-col-1] = temp ;
+                   }
+                   if(image[row][col] == 0)
+                   {
+                      image[row][col] = 1; 
+                   }else
+                   {
+                       image[row][col] = 0 ;
+                   }
+               }
+           }
+       return image ;
+   }
+
+        public static int oddCells(int m, int n, int[][] indices) {
+            int[][] matrix = new int[m][n] ;
+           for(int i = 0; i < indices.length; i++)
+           {
+               for(int j = 0; j<indices[i].length; j++)
+               { 
+                   if(j == 0)
+                   {
+                    for(int col = 0; col < matrix[indices[i][j]].length; col++)
+                       {
+                          matrix[indices[i][j]][col] += 1 ;
+                       }
+                   }else
+                   {
+                    for(int col = 0; col < matrix.length; col++)
+                       {
+                          matrix[col][indices[i][j]] += 1 ;
+                       }
+                   }
+             
+               }
+           }
+
+            int odd = 0 ;
+           for(int row = 0; row<matrix.length; row++)
+           {
+               for(int col=0; col< matrix[row].length; col++)
+               {
+                   if(matrix[row][col] % 2 != 0)
+                   {
+                       odd++ ;
+                   }
+               }
+           }
+
+           return odd ;
+
         }
 }
