@@ -1,6 +1,7 @@
 package MyProject;
 
 import java.util.* ;
+import java.math.*;
 
 public class ArraySolutions {
 
@@ -34,40 +35,76 @@ public class ArraySolutions {
 //		int [][] image = {{1,1,0},{1,0,1},{0,0,0}} ;
 //		System.out.println(flipAndInvertImage(image)); 
 //
-		int [][] indices = {{2,1,5},{3,4,6},{6,7,7}} ;
+		int [][] indices = {{2,1,5},
+							{3,4,6},
+							{6,7,7}} ;
 //		 print2DArray(oddCells(2,3,indices));
-		  System.out.println(diagonalSum(indices));  
+//		  System.out.println(diagonalSum(indices));  
+//		diagonalSum(indices) ;
+//		
+//		int [][] array = new int[indices.length][];
+//		System.out.println(array[0][]);
+		int[] num = {1,2,0,0} ;
+		System.out.println(addToArrayForm(num,34));
+
+	}
+
+    public static List<Integer> addToArrayForm(int[] num, int k) {
+   	 List<Integer> ans = new ArrayList<Integer>() ;
+       BigInteger sum = new BigInteger("0");
+       for(int i=0; i<num.length; i++)
+       {
+    	   sum = sum.multiply(new BigInteger("10"));
+           sum = sum.add(BigInteger.valueOf(num[i]));
+       }
+       sum = sum.add(BigInteger.valueOf(k)) ;
+
+       while(sum.compareTo(new BigInteger("0")) > 0 )
+       {
+           BigInteger r = sum.mod(new BigInteger("10"))   ;
+           int n = r.intValue();
+           sum = sum.divide(new BigInteger("10")) ;
+           ans.add(0,n);
+       }
+       return ans;
+   }
+	
+	
+    public int[][] transpose(int[][] matrix) {
+        int[][] ans = new int[matrix[0].length][matrix.length] ;
+
+        for(int row=0; row<ans.length; row++)
+        {
+            for(int col=0; col<ans[row].length; col++)
+            {
+                ans[row][col] = matrix[col][row] ;
+            }
+        }
+        return ans;
+    }
+
+	public static int diagonalSum(int[][] mat) 
+{
+	int sum =0;
+	for(int row = 0; row < mat.length;row++) 
+	{
+		sum += mat[row][row] ;
+	}
+	int n = mat.length-1 ;
+	int k = 0 ;
+	
+	while(n >= 0  ) 
+	{
+        if(n != k)
+        {
+            sum += mat[n][k] ;
+        }
+        k++ ;
+        n--;
 	}
 	
-	 public static int diagonalSum(int[][] mat) {
-		 	
-		 int sum =0;
-		 
-		 if(mat.length % 2== 0) 
-		 {
-			 
-		 }else 
-		 {
-			 int center = (mat.length % 2) +1;
-			 for(int row = 0 ; row < mat.length; row++) 
-			 {
-				 int i = row ;
-				 int j = center;
-				 while(i < j) 
-				 {
-					 sum += mat[j-1][j-1] ;
-					 j-- ;
-				 }
-				 
-				 j = mat.length ;
-				 i = center ;
-				 while(i)
-			 }
-		 }
-		 
-		 return sum ;
-		 
-	    }
+	return sum ;
+}
 	
 	public static void printArray(int [] arr) 
 	{
@@ -346,5 +383,23 @@ public class ArraySolutions {
 
            return odd ;
 
+        }
+        public int findNumbers(int[] nums) {
+            int even =0;
+            for(int i=0; i<nums.length;i++)
+            {
+                int count = 0 ;
+                int number = nums[i] ;
+                while(number > 0)
+                {
+                    number = number/10 ;
+                    count++;
+                }
+                if(count %2 == 0)
+                {
+                    even++ ;
+                }
+            }
+            return even ;
         }
 }
