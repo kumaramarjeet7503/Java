@@ -44,8 +44,16 @@ public class ArraySolutions {
 //		
 //		int [][] array = new int[indices.length][];
 //		System.out.println(array[0][]);
-		int[] num = {1,2,0,0} ;
-		System.out.println(addToArrayForm(num,34));
+//		int[] num = {1,2,0,0} ;
+//		System.out.println(addToArrayForm(num,34));
+		
+	    int mat[][] =	{{0,0},
+	    				 {0,1}};
+	    int[][] target = {{0,0},
+	    				  {1,0}} ;
+				
+		System.out.println(findRotation(mat, target)); 
+		
 
 	}
 
@@ -69,6 +77,35 @@ public class ArraySolutions {
        return ans;
    }
 	
+    public static boolean findRotation(int[][] mat, int[][] target) {
+        int [][] operation = new int [mat.length][mat[0].length];
+        int arrayElement = mat.length * mat[0].length ;
+        boolean ans = false ;
+        int length = 0;
+
+    for(int row = 0; row < operation.length; row++)
+    {
+         int[] temp =  mat[row];
+        for(int col = 0; col < operation[row].length; col++)
+        {
+            if( row <= mat.length ){
+                    operation[row][col] = mat[mat.length-row-1][col];
+                    operation[operation.length-row-1][col] = temp[col] ;
+                }
+            if(operation[row][col] == target[row][col])
+            {
+                length++ ;
+            }
+        }
+    }
+
+    if(length == arrayElement)
+    {
+        ans = true;
+    }
+    return ans ;
+
+    }
 	
     public int[][] transpose(int[][] matrix) {
         int[][] ans = new int[matrix[0].length][matrix.length] ;
