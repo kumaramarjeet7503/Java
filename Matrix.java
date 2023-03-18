@@ -16,20 +16,35 @@ public class Matrix {
 //		exitPoint(matB) ;
 //		 System.out.println(findRotation(matA, matB));
 //		System.out.println(Arrays.toString(sumZero(5)));
-		int[][] matrix = {{1,10,4,3},
+		int[][] matrix = {{1,1,4,3},
 						  {9,3,8,3},
-						  {15,16,17,2},
-						  {19,3,13,4}} ;
+						  {1,6,7,2},
+						  {9,3,3,4}} ;
 
-		shellRotate( matrix  , 1, 1 ) ; 
-		for (int i =0 ; i < matrix.length ; i++) 
-		{
-			System.out.println(Arrays.toString(matrix[i])); 
-		}
+//		shellRotate( matrix  , 1, 1 ) ; 
+//		for (int i =0 ; i < matrix.length ; i++) 
+//		{
+//			System.out.println(Arrays.toString(matrix[i])); 
+//		}
 //		 System.out.println(luckyNumbers(matrix)); 
 		
 //		int[] mat = {1,2,3,4,5} ;
+		diagonalTraversal(matrix) ;
 	
+	}
+	
+	public static void diagonalTraversal(int[][] mat) 
+	{
+			for(int row =0 ; row < mat.length; row++) 
+			{
+				int i = 0 ;
+				for( int col = row  ; col < mat[0].length; col++) 
+				{
+					System.out.println(mat[i][col]);
+					i++ ;
+				}
+			}
+
 	}
 	
 	public static void shellRotate(int[][] matrix  , int s, int r ) 
