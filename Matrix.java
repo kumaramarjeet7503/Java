@@ -16,10 +16,162 @@ public class Matrix {
 //		exitPoint(matB) ;
 //		 System.out.println(findRotation(matA, matB));
 //		System.out.println(Arrays.toString(sumZero(5)));
-		int[][] matrix = {{1,10,4,2},
-						  {9,3,8,7},
-						  {15,16,17,12}} ;
-		 System.out.println(luckyNumbers(matrix)); 
+		int[][] matrix = {{1,10,4,3},
+						  {9,3,8,3},
+						  {15,16,17,2},
+						  {19,3,13,4}} ;
+
+		shellRotate( matrix  , 1, 1 ) ; 
+		for (int i =0 ; i < matrix.length ; i++) 
+		{
+			System.out.println(Arrays.toString(matrix[i])); 
+		}
+//		 System.out.println(luckyNumbers(matrix)); 
+		
+//		int[] mat = {1,2,3,4,5} ;
+	
+	}
+	
+	public static void shellRotate(int[][] matrix  , int s, int r ) 
+	{
+
+		int[] arr =  transferShellToArray(matrix, s) ;
+		rotateArray(arr, r) ;
+//		System.out.println(Arrays.toString(arr));
+		transferArrayToShell(matrix, arr, s) ;
+	}
+	
+	public static int[] transferShellToArray(int[][] mat, int s) 
+	{
+		int minRow = s ;
+		int minCol = s ;
+		int maxRow = mat.length - s ;
+		int maxCol = mat[0].length - s ;
+		int arrLength =  2 *( maxRow - minRow + maxCol - minCol ) -4  ;
+		int[] arr = new int[arrLength] ;
+		int i = 0 ;
+		while(true) 
+		{
+			if(i == arrLength ) 
+			{
+				break ;
+			}
+		
+			
+			for(int j = minRow; j < maxRow; j++) 
+			{
+				arr[i] = mat[j][minCol] ;
+				i++;
+			}
+			minCol++ ;
+			
+			for(int j = minCol ; j < maxCol; j++) 
+			{
+				arr[i] = mat[maxRow-1][j] ;
+				i++;
+			}
+			maxRow-- ;
+			
+			for(int j = maxRow-1; j > minRow; j--) 
+			{
+				arr[i] = mat[j][maxCol-1] ;
+				i++;
+			}
+			maxCol-- ;
+			
+			for(int j = maxCol; j > minRow; j--) 
+			{
+				arr[i] = mat[minRow][j] ;
+				i++;
+			}
+		}
+		return arr ;
+	}
+	
+	public static void rotateArray(int[] arr, int r) 
+	{
+		int start = 0 ;
+		int startEnd = arr.length - 1 -r ;
+		int endStart = arr.length -r ;
+		int end = arr.length ;
+		
+		int i = start ;
+		while( i <= startEnd/2 ) 
+		{
+			int temp = arr[i] ;
+			arr[i]  = arr[startEnd-i] ;
+			arr[startEnd-i]  = temp ;
+			i++ ;
+		}
+		
+		int j = endStart ;
+		int mid = end - endStart ;
+		mid =  endStart + mid/2 ;
+		int s = 0;
+		while( j < mid ) 
+		{
+			int temp = arr[j] ;
+			arr[j]  = arr[end-1-s] ;
+			arr[end-1-s]  = temp ;
+			j++ ;
+			s++;
+		}
+		
+		int k = start ;
+		while( k < end/2 ) 
+		{
+			int temp = arr[k] ;
+			arr[k]  = arr[end -1 - k] ;
+			arr[end -1 - k]  = temp ;
+			k++ ;
+		}
+	}
+	
+	public static int[] transferArrayToShell(int[][] mat, int[] arr ,int s) 
+	{
+		int minRow = s ;
+		int minCol = s ;
+		int maxRow = mat.length - s ;
+		int maxCol = mat[0].length - s ;
+		int arrLength = arr.length ;  ;
+
+		int i = 0 ;
+		while(true) 
+		{
+			if(i == arrLength ) 
+			{
+				break ;
+			}
+		
+			
+			for(int j = minRow; j < maxRow; j++) 
+			{
+				 mat[j][minCol] = arr[i] ;
+				i++;
+			}
+			minCol++ ;
+			
+			for(int j = minCol ; j < maxCol; j++) 
+			{
+			 mat[maxRow-1][j] = 	arr[i]  ;
+				i++;
+			}
+			maxRow-- ;
+			
+			for(int j = maxRow-1; j > minRow; j--) 
+			{
+			  mat[j][maxCol-1] = 	arr[i] ;
+				i++;
+			}
+			maxCol-- ;
+			
+			for(int j = maxCol; j > minRow; j--) 
+			{
+				  mat[minRow][j]  = arr[i] ;
+				i++;
+			}
+		}
+		return arr ;
 	}
 	
     public static List<Integer> luckyNumbers (int[][] matrix) {
@@ -262,4 +414,40 @@ public class Matrix {
 		System.out.println(j);
 	}
 	
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int[][] sol = new int[r][c];
+        int matrixElement = mat.length * mat[0].length ;
+        int solElement = sol.length *sol[0].length ;
+        if(solElement == matrixElement)
+        {
+            int i = 0 ;
+            int j = 0 ;
+            for(int row = 0 ; row < mat.length; row++ )
+            {
+                for(int col = 0 ; col < mat[0].length; col++)
+                {
+                    while(true)
+                    {
+                           
+                           if(j == sol[0].length -1 )
+                           {
+                            sol[i][j] = mat[row][col] ;
+                              i++;
+                              j = 0 ;
+                           }else
+                           {
+                                sol[i][j] = mat[row][col] ;
+                               j++;
+                           }  break ;
+                        }
+                        
+                }
+            }
+        }else
+        {
+            return mat ;
+        }
+        return sol ;
+    }
+
 }
