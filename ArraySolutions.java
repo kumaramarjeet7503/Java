@@ -57,6 +57,68 @@ public class ArraySolutions {
 
 	}
 	
+    public int[] searchRange(int[] nums, int target) {
+        
+        int length = 0;
+        for(int i = 0 ; i < nums.length; i++)
+        {
+            if(nums[i] == target )
+            {
+                length++ ;
+            }
+        }
+        if(length == 0 )
+        {
+            int[] sol = {-1,-1};
+            return sol ;
+        }
+
+        if(length == 1 )
+        {
+            int[] sol = new int[length+1] ;
+            int j = 0 ;
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+            if(nums[i] == target )
+            {
+                sol[j] = i ;
+                sol[j+1] = i ;
+            }
+        }
+        return sol ;
+        }
+
+        int[] sol = new int[2] ;
+
+        int j = 0;
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+            if(nums[i] == target && j == 0 )
+            {
+                sol[j] = i ;
+                j++ ;
+            }else if( (nums[i] == target && i == nums.length-1 ) || (nums[i] == target && i+1 < nums.length  && nums[i+1] != target) )
+            {
+                sol[j] = i ;
+            }
+        }
+
+        return sol ;
+    }
+	
+    public void sortColors(int[] nums) {
+        for(int i = 0 ; i < nums.length; i++)
+        {
+            for(int j = i + 1 ; j < nums.length; j++)
+            {
+                if(nums[i] > nums[j] ){
+                    int temp = nums[i] ;
+                    nums[i] = nums[j] ;
+                    nums[j] = temp ;
+                }
+            }
+        }
+	
 	   public int[] productExceptSelf(int[] nums) {
 	        int[] sol = new int[nums.length] ;
 
