@@ -28,10 +28,54 @@ public class Matrix {
 //		}
 //		 System.out.println(luckyNumbers(matrix)); 
 		
-//		int[] mat = {1,2,3,4,5} ;
-		diagonalTraversal(matrix) ;
+		int[] mat = {1,2,3,4,5,6,7} ;
+//		diagonalTraversal(matrix) ;
+		
+		rotate(mat, 3 ) ;
+		System.out.print(Arrays.toString(mat));
+//		[5,6,7,1,2,3,4]
 	
 	}
+	
+
+	    public static void rotate(int[] nums, int k) {
+
+	        if(nums.length == 1)
+	        {
+	            return ;
+	        }
+
+	        int start = 0 ;
+	        int startk =  nums.length -  k % nums.length     ;
+	        int endk = startk ;
+	        int end = nums.length ;
+
+
+	        for(int i = start ; i < startk/2 ; i++ )
+	        {
+	            int temp = nums[i] ;
+	            nums[i] = nums[startk - i - 1] ;
+	            nums[startk - i - 1] = temp ;
+	        }
+			int mid =  end - endk ;
+			mid =  endk + mid/2 ;
+			int j = 0 ;
+	        for(int i = endk ; i < mid ; i++  )
+	        {
+	            int temp = nums[i] ;
+	            nums[i] = nums[end - j - 1] ;
+	            nums[end - j - 1] = temp ;
+	            j++;
+	        }
+
+	        for(int i = start ; i < end/2 ; i++  )
+	        {
+	            int temp = nums[i] ;
+	            nums[i] = nums[end -1 - i] ;
+	            nums[end -1 - i] = temp ;
+	        }
+	    }
+	
 	
 	public static void diagonalTraversal(int[][] mat) 
 	{

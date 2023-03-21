@@ -56,6 +56,85 @@ public class ArraySolutions {
 		
 
 	}
+	
+	   public int[] productExceptSelf(int[] nums) {
+	        int[] sol = new int[nums.length] ;
+
+	            int product = 1 ;
+	            int isZero = 0 ;
+	            for(int j = 0 ; j < nums.length; j++ )
+	            {
+	                if(nums[j] != 0 ){
+	                    product = product * nums[j] ;
+	                    }else
+	                    {
+	                        isZero++ ;
+	                    }
+	            }
+
+	            for(int i = 0 ; i < nums.length ; i++)
+	            {
+	                if(nums[i] == 0 && isZero == 1 )
+	                {
+	                    sol[i] = product ;
+	                }else if( isZero != 0 )
+	                {
+	                   sol[i] = 0 ;
+	                }else
+	                {
+	                     sol[i] = product/nums[i] ;
+	                }
+	                
+	            }
+
+	        return sol ;
+	    }
+	
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> sol = new ArrayList<Integer>(matrix.length) ;
+        int arrayElement = matrix.length * matrix[0].length ;
+        int length = 0 ;
+            int minr = 0 ;
+            int minc = 0;
+            int maxr = matrix.length ;
+            int maxc = matrix[0].length ;
+        while(true)
+        {
+
+
+            if(arrayElement <= length )
+            {
+                break ;
+            }
+
+            for(int i = minc ; i < maxc && arrayElement > length  ; i++  )
+            {
+                sol.add(matrix[minr][i]) ;
+                length++ ;
+            } 
+            minr++ ;
+            for(int i = minr ; i < maxr  && arrayElement > length  ; i++  )
+            {
+                sol.add(matrix[i][maxc-1]) ;
+                 length++ ;
+            }
+            maxc-- ;
+            for(int i = maxc -1 ; i >= minc  && arrayElement > length  ; i--  )
+            {
+                sol.add(matrix[maxr-1][i]) ;
+                 length++ ;
+            }
+            maxr--;
+            for(int i = maxr -1 ; i >= minr  && arrayElement > length  ; i-- )
+            {
+                sol.add(matrix[i][minc]) ;
+                 length++ ;
+            }
+            minc++ ;
+        }
+        return  sol ;
+    }
+
 
     public static List<Integer> addToArrayForm(int[] num, int k) {
    	 List<Integer> ans = new ArrayList<Integer>() ;
