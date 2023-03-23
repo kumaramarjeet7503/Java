@@ -46,16 +46,36 @@ public class ArraySolutions {
 //		System.out.println(array[0][]);
 //		int[] num = {1,2,0,0} ;
 //		System.out.println(addToArrayForm(num,34));
+//		
+//	    int mat[][] =	{{0,0},
+//	    				 {0,1}};
+//	    int[][] target = {{0,0},
+//	    				  {1,0}} ;
 		
-	    int mat[][] =	{{0,0},
-	    				 {0,1}};
-	    int[][] target = {{0,0},
-	    				  {1,0}} ;
+		int[][] points =   {{-19,9},
+				{-15,-19},
+				{-5,-8}} ;
 				
-		System.out.println(findRotation(mat, target)); 
+		System.out.println(findMaxValueOfEquation( points, 10)); 
 		
 
 	}
+	
+    public static int findMaxValueOfEquation(int[][] points, int k) {
+        int max = 0 ; 
+        for(int row = 0 ; row < points.length; row++ )
+        {
+            if(row+1 < points.length ){
+                int sumOfX = Math.abs(points[row][0] - points[row+1][0] ) ;
+                int sumOfY = points[row][1] + points[row+1][1] ;
+                if(sumOfX <= k && max < sumOfX + sumOfY )
+                {
+                    max = sumOfX + sumOfY ;
+                }  
+            }         
+        }
+        return max ;
+    }
 	
     public int[] searchRange(int[] nums, int target) {
         
