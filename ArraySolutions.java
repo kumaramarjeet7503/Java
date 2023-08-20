@@ -60,6 +60,40 @@ public class ArraySolutions {
 		
 
 	}
+
+    public static List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> sol = new ArrayList<Integer>(matrix.length) ;
+
+        for(int row =0 ; row < matrix.length ; row++ )
+        {
+             boolean flag = true ;
+             int min = 99999; 
+             int minInd = 0 ;
+            for(int col =0; col < matrix[0].length; col++)
+            {
+               if(matrix[row][col] < min )
+               {
+                   min = matrix[row][col] ;
+                   minInd = col ;
+               }
+            }
+
+            for(int col = 0 ; col < matrix.length ; col++)
+            {
+                if(matrix[row][minInd] < matrix[col][minInd] )
+                {
+                    flag = false ;
+                    break ;
+                }
+            }
+            if(flag)
+            {
+                sol.add(matrix[row][minInd]) ;
+            }
+
+        }
+        return sol ;
+    }
 	
     public static int findMaxValueOfEquation(int[][] points, int k) {
         int max = 0 ; 
@@ -126,18 +160,18 @@ public class ArraySolutions {
         return sol ;
     }
 	
-    public void sortColors(int[] nums) {
-        for(int i = 0 ; i < nums.length; i++)
-        {
-            for(int j = i + 1 ; j < nums.length; j++)
-            {
-                if(nums[i] > nums[j] ){
-                    int temp = nums[i] ;
-                    nums[i] = nums[j] ;
-                    nums[j] = temp ;
-                }
-            }
-        }
+    // public void sortColors(int[] nums) {
+    //     for(int i = 0 ; i < nums.length; i++)
+    //     {
+    //         for(int j = i + 1 ; j < nums.length; j++)
+    //         {
+    //             if(nums[i] > nums[j] ){
+    //                 int temp = nums[i] ;
+    //                 nums[i] = nums[j] ;
+    //                 nums[j] = temp ;
+    //             }
+    //         }
+    //     }
 	
 	   public int[] productExceptSelf(int[] nums) {
 	        int[] sol = new int[nums.length] ;

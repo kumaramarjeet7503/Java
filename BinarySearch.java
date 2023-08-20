@@ -4,10 +4,88 @@ public class BinarySearch {
 
     public static void main(String[] args)
     {
-        int[] arr = {5,4,10,8,14,6} ;
-     System.out.println(findPeakElement(arr)) ;    
+        int[] arr = {10,20,30,40} ;
+     System.out.println(findMinimumNumberOfPages(arr,2)) ;    
     }  
 
+    public static int findMinimumNumberOfPages(int[] arr, int students)
+    {
+        // Input
+        // Here an array is given which represent number of pages.
+        // Students availaible to read should be given
+       
+
+        int max = 0 ;
+        int sum = 0 ;
+        int res = -1 ; 
+        for (int i = 0; i < arr.length; i++) {
+            sum = sum + arr[i] ;
+            if(max < arr[i] )
+            {
+                max= arr[i] ;
+            }
+        }
+
+        while(max <= sum)
+        {
+            int mid = max + (sum - max) / 2 ;
+            if(isValidAllocation(arr, max , students , mid))
+            {
+                res = mid ;
+                sum = mid -1 ;
+            }else
+            {
+                max = mid + 1 ;
+            }
+
+        }
+        return res ;
+    }
+
+    public static boolean isValidAllocation(int[] arr, int max , int students , int mid )
+    {
+         // Check these three criteria as student should be given at least 1 book , the book allocation will be continious , 1 student will only read 1 full book
+        int studentCount = 1 ;
+        int allocationSum = 0 ;
+         for (int i = 0; i < arr.length; i++) {
+            allocationSum += arr[i] ;
+            if(allocationSum <= mid )
+            {
+            }else
+            {
+                studentCount = studentCount + 1  ;
+                allocationSum = arr[i] ;
+            }
+            if(studentCount > students)
+            {
+                return false ;
+            }
+        }
+         return true ;
+    }
+
+    public static int sortedMatrixBS(int[][] arr, int target)
+    {
+        int i = 0 ;
+        int j = arr[0].length - 1  ;
+        while(i >= 0 && i < arr.length && j >= 0 && j < arr[0].length )
+        {
+
+            if(arr[i][j] == target )
+            {
+                return  arr[i][j] ;
+            }
+            if(arr[i][j] > target )
+            {
+                j--;
+            }else if(arr[i][j] < target )
+            {
+                i++ ;
+            }
+        }
+
+        return -1 ;
+    }
 
     public static int findPeakElement(int[] arr)
     {
@@ -61,7 +139,6 @@ public class BinarySearch {
                 start = mid + 1 ;
             }
         }
-        int min = -1 ;
         int  startDiff =  Math.abs(arr[start] - target ) ;
         int endDiff =  Math.abs(arr[end] - target ) ;
         return startDiff > endDiff ? arr[end] : arr[start] ;

@@ -19,9 +19,142 @@ public class SearchSolutions {
 		int[] nums = {1,0,1,1,1} ;
 //		int[] nums = {1,2,3,1} ;
 		// System.out.println(search(nums,3));
-        reachNumber(2) ;
+        // reachNumber(2) ;
+        int[] piles = {312884470} ;
+        minEatingSpeed( piles, 312884469);
 
 	}
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int start  = 1 ;
+        int end  =Integer.MAX_VALUE ;
+
+        while(start < end)
+        {
+            int mid = start + ( end - start )/2 ;
+            if(isPossible(piles, h, mid))
+            {
+                end = mid ; 
+            }else
+            {
+                start = mid +1 ;
+            }
+        }
+        return start ;
+    }
+
+    private boolean isPossible(int[] piles, int h , int k)
+    {
+        int time = 0 ;
+        for(int p : piles)
+        {
+            time  += (p-1) / k+1 ;
+            if(time > h)
+                {
+                    break ;
+                }
+        }
+        return time <= h ;
+    }
+
+
+
+     public static int minEatingSpeed(int[] piles, int h) {
+        long start  = 1 ;
+        long end  =0 ;
+        int minHour = Integer.MAX_VALUE;
+
+        for(int i = 0 ; i < piles.length ; i++)
+        {
+            end += (long) piles[i]  ;
+        }
+
+        while(start < end )
+        {
+            int j = 0 ;
+            long mid = start + (end - start)/2 ;
+            int hour = 0 ; 
+            boolean isChanged = true ;
+            int temp =  0 ;
+            while(j < piles.length)
+            {
+                
+                if(isChanged){
+                    temp =  piles[j] ; 
+                }
+               
+                if(piles[j] <= mid )
+                {
+                    piles[j] =  temp ;
+                    j++ ;
+                    isChanged = true ;                    
+                }else
+                {
+                    piles[j] = piles[j] - (int) mid ;
+                    isChanged = false ;
+                }
+                hour++ ;
+            }
+            if(hour <= h)
+                {
+                    if(minHour > mid )
+                    {
+                        minHour = (int) mid  ;
+                    }
+                    end = mid ;
+                }else
+            {
+                start = mid + 1 ;
+            }
+      
+        }
+        return minHour ;
+    }
+
+        public static int maxValue(int n, int index, int maxSum) {
+        long left = index ;
+        long right = n - index -1 ;
+        long low = 1 ;
+        long high = (long) maxSum ;
+        long res = 0 ;
+        while( low <= high )
+        {
+            long mid =  low + (high - low)/2 ;
+            long sum = (long) mid ;
+            long rightSum = 0 ;
+            long leftSum = 0 ;
+            long m = mid -1 ;
+            if(right <= m)
+            {
+                rightSum = (long) m*(m+1)/2 - (m-right)*((m-right) +1 )/2  ;
+            }
+            else
+            {
+                 rightSum = (long) m*(m+1)/2 + 1*( right - m) ;
+            }
+
+            if(left <= m)
+            {
+                leftSum = (long) m*(m+1)/2 - (m-left)*((m-left) +1 )/2  ;
+            }
+            else
+            {
+                 leftSum = (long) m*(m+1)/2 + 1*(left - m) ;
+            }
+
+            sum += leftSum + rightSum ;
+            if(sum <= maxSum )
+            {
+                res = mid ;
+                low = mid + 1 ;
+            }else
+            {
+                high = mid -1 ;
+            }
+        }
+
+        return (int) res ;
+    }
 
        public static int reachNumber(int target) {
         target = Math.abs(target) ;
@@ -44,45 +177,45 @@ public class SearchSolutions {
         return step ;
     }
 	
-    public static int[] findRightInterval(int[][] intervals) {
-        HashMap<Integer,Integer> hm = new HashMap<>() ;
-        int[] first = new int[intervals.length] ;
+//     public static int[] findRightInterval(int[][] intervals) {
+//         HashMap<Integer,Integer> hm = new HashMap<>() ;
+//         int[] first = new int[intervals.length] ;
         
-        for(int i = 0 ; i < intervals.length; i++) 
-        {
-        	hm.put(intervals[i][0],i) ;
-        	first[i] = intervals[i][0] ;
-        }
+//         for(int i = 0 ; i < intervals.length; i++) 
+//         {
+//         	hm.put(intervals[i][0],i) ;
+//         	first[i] = intervals[i][0] ;
+//         }
         
-        Arrays.sort(first);
+//         Arrays.sort(first);
         
-        for(int i = 0 ; i < intervals.length ; i++) 
-        {
-        	int key = 
-        }
+//         for(int i = 0 ; i < intervals.length ; i++) 
+//         {
+//         	// int key = 
+//         }
         
-    }
+//     }
     
-    public static boolean search(int[] nums, int target) {
-    int pivot = findPivot(nums) ;
-    int start = 0 ;  
-    int end = nums.length - 1 ;
-    if(pivot == -1 )
-    {
-        return binarySearch(nums, target, 0 , end ) ;
-    } 
-    if( nums[pivot] == target )
-    {
-        return true ;
-    }
-    if(nums[start] <= target )
-    {
-        return binarySearch(nums, target, start , pivot) ;
-    }else
-    {
-        return binarySearch(nums, target, pivot + 1 , end) ;
-    }
-}
+//     public static boolean search(int[] nums, int target) {
+//     int pivot = findPivot(nums) ;
+//     int start = 0 ;  
+//     int end = nums.length - 1 ;
+//     if(pivot == -1 )
+//     {
+//         return binarySearch(nums, target, 0 , end ) ;
+//     } 
+//     if( nums[pivot] == target )
+//     {
+//         return true ;
+//     }
+//     if(nums[start] <= target )
+//     {
+//         return binarySearch(nums, target, start , pivot) ;
+//     }else
+//     {
+//         return binarySearch(nums, target, pivot + 1 , end) ;
+//     }
+// }
 
 public static int findPivot(int[] nums)
 {

@@ -4,11 +4,87 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.* ;
 
 public class ArrayListConcept {
     public static void main(String[] args)
     {
-        operationOnArrayList() ;
+        String num = "1210" ;  
+        digitCount( num) ;
+    }
+
+    public static boolean digitCount(String num) {
+        Map<Character, Integer> map = new HashMap<>() ;
+        for(int i = 0 ; i < num.length(); i++)
+        {
+            int count = 0;
+            for(int j = 0 ; j < num.length(); j++)
+            {
+               if(num.charAt(i) == num.charAt(j) )
+               {
+                   map.put(num.charAt(i),count++);
+               }
+            }
+        }
+ 
+
+    for(int i = 0 ; i < num.length(); i++)
+    {
+       if(map.get(i) != num.charAt(i) )
+       {
+           return false ;
+       }
+    }
+    return true ;
+    }
+
+    public static boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        List<Character> word1Arr = new ArrayList<>()  ;
+        List<Character> word2Arr = new ArrayList<>()  ;
+
+       addCharacterIntoArray( word1 , word1Arr);
+       addCharacterIntoArray( word2 , word2Arr);
+
+       return word1Arr.equals(word2Arr) ;
+    }
+
+    public static  void addCharacterIntoArray(String[] word, List<Character> wordArray )
+    {
+        for(int i = 0; i < word.length; i++)
+        {
+            for(int j = 0 ; j < word[i].length(); j++ )
+            {
+                wordArray.add(word[i].charAt(j)) ;
+            }
+        }
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        ArrayList<Integer> ans = new ArrayList<Integer>() ;
+
+        // For each for array traversal 
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+            if(ans.isEmpty())
+            {
+                ans.add(nums[i]);
+            }
+            if( i > 0 && nums[i-1] != nums[i] )
+            {
+                ans.add(nums[i]) ;
+            }
+        }
+
+        for(int i = 0 ; i < ans.size() ; i++)
+        {
+            nums[i] = ans.get(i) ;
+        }
+
+       
+
+        return ans.size()  ; 
     }
 
     public static void basicConceptArrayList()
