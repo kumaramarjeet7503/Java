@@ -1,7 +1,6 @@
 # Java Data Structures
 
 ## Overview
-
 This repository contains a collection of common data structures implemented in Java. These data structures serve as fundamental building blocks for various algorithms and applications and are designed for efficiency, flexibility, and ease of use.
 
 ## Data Structures Included
